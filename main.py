@@ -20,4 +20,21 @@ else:
 resolution = (800,600)
 display_size = pygame.display.set_mode(resolution)
 pygame.display.set_caption('Snake Game')
-time.sleep(3)
+
+
+#3. colors
+red = pygame.Color(255, 255, 0) #Game over
+white = pygame.Color(255,255,255) #background
+black = pygame.Color(0,0,0) #score
+
+#4. Variables for game play
+
+direction = 'RIGHT'
+change_dir_to = direction
+
+snakePosition = [700,100]
+snakeLength = [[100,50],[90,50],[80,50]]
+
+foodPosition = [random.randrange(1,80)*10, random.randrange(1,60)*10]
+foodSpawn = True
+
