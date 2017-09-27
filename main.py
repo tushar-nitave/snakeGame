@@ -60,15 +60,47 @@ while True:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT or event.key == odr('d'):
+            if event.key == pygame.K_RIGHT or event.key == ord('d'):
                 change_dir_to = 'RIGHT'
-            if event.key == pygame.K_LEFT or event.key == odr('a'):
+            if event.key == pygame.K_LEFT or event.key == ord('a'):
                 change_dir_to = 'LEFT'
-            if event.key == pygame.K_UP or event.key == odr('w'):
+            if event.key == pygame.K_UP or event.key == ord('w'):
                 change_dir_to = 'UP'
-            if event.key == pygame.K_DOWN or event.key == odr('s'):
+            if event.key == pygame.K_DOWN or event.key == ord('s'):
                 change_dir_to = 'DOWN'
             if event.key == pygame.K_ESCAPE:
-                pygame.event.post(pygame.event.EVENT(pygame.QUIT))
+                pygame.event.post(pygame.event.Event(pygame.QUIT))
                 sys.exit()
                 
+                
+    #checking for valid directions
+    if change_dir_to == 'RIGHT' and not direction == 'LEFT':
+        direction = 'RIGHT'
+    if change_dir_to == 'LEFT' and not direction == 'RIGHT':
+        direction = 'LEFT'
+    if change_dir_to == 'UP' and not direction == 'DOWN':
+        direction = 'UP'
+    if change_dir_to == 'DOWN' and not direction == 'UP':
+        direction = 'DOWN'
+        
+    #changing snake length
+    if direction == 'RIGHT' or direction == 'DOWN':
+        snakePosition[0] += 10
+    if direction == 'UP' or direction == 'LEFT':
+        snakePosition[0] -= 10
+        
+    #snake body mechanism
+    snakeLength.insert(0, list(snakePosition))
+    if snakePosition[0] == foodPosition[0] and snakePosition[1] == foodPosition[1]:
+        foodSpawn = False
+    else:
+        snakeLength.pop()
+    if foodSpawn == False:
+        foodPosition = [random.randrange(1,80)*10, random.randrange(1,60)*10]
+    foodSpawn = True
+    
+    #adding elements to the canvas(playing surface)
+    
+    playArea.fill(white)
+    pygame.display.flip()
+    
