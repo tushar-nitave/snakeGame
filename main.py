@@ -116,6 +116,8 @@ while True:
             speed = 25
         if score == 10:
             speed = 35
+        if score == 15:
+            speed = 45
             
         foodSpawn = False
     else:
